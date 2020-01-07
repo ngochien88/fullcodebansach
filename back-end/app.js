@@ -3,10 +3,12 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 var express_handlebars_sections = require('express-handlebars-sections');
 var bodyParser = require('body-parser');
+
 var path = require('path');
 var wnumb = require('wnumb');
 var logger = require('morgan')
 
+var passport = require('./config/passport');
 var userController = require('./controllers/userController'),
     dashboardController = require('./controllers/dashboardController'),
     accountController = require('./controllers/accountController'),
@@ -47,6 +49,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(passport.initialize());
 
 // session
 

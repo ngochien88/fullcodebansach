@@ -1,7 +1,8 @@
 
 var express = require('express'),
     SHA256 = require('crypto-js/sha256'),
-    moment = require('moment');
+    moment = require('moment'),
+    passport = require('passport');
 
 var router = express.Router();
 var config = require('../config/config');
@@ -23,33 +24,19 @@ router.get('/admin', (req, res) => {
 });
 
 router.post('/admin', (req, res) => {
-    var user = {
-        username: req.body.username,
-        password: SHA256(req.body.password).toString()
-    };
-    //console.log(user);
-    userRepo.login(user).then(rows => {
-        //console.log(rows);
-        if (rows.length > 0) {
-            req.session.isLogged = true;
-            //res.redirect('/admin/dashboard');
-
-            req.session.user = rows[0];
-            var url = '/admin/dashboard';
-            if (req.query.retUrl) {
-                url = req.query.retUrl;
-            }
-            res.redirect(url);
-        }
-        else {
-            var vm = {
+    return passport.authenticate('user', (err, user, info) => {
+        if (err) {
+            let vm = {
                 layout: false,
                 error: true
             }
-            res.render('admin/users/login', vm);
+            return res.render('admin/users/login', vm);
         }
-    });
-
+        req.session.isLogged = true;
+        req.session.user = user;
+        const url = req.query.retUrl ? req.query.retUrl : '/admin/dashboard';
+        res.redirect(url);
+    })(req, res);
 });
 
 router.get('/admin/customers', restrict, (req, res) => {
@@ -441,46 +428,42 @@ router.get('/category/:id', (req, res) => {
         res.render('bookstore/category/index', vm);
     });
 });
+
 router.post('/category/:id', (req, res) => {
     req.session.limit = req.body.limit;
     res.redirect('/category/' + req.params.id);
 });
+
 router.get('/login', (req, res) => {
     vm = {
         layout: 'index.handlebars'
     }
     res.render('bookstore/index/login', vm);
 });
-router.post('/login', (req, res) => {
-    var user = {
-        username: req.body.username,
-        password: SHA256(req.body.password).toString()
-    };
-    userRepo.loginCustomer(user).then(rows => {
-        //console.log(rows);
-        if (rows.length > 0) {
-            req.session.isLogged = true;
-            //res.redirect('/admin/dashboard');
 
-            req.session.user = rows[0];
-            var url = '/';
-            if (req.query.retUrl) {
-                url = req.query.retUrl;
-            }
-            if (!req.session.cartLayout)
-                req.session.cartLayout = [];
-            res.locals.layoutVM.isEmpty = true;
-            res.redirect(url);
-        }
-        else {
+router.post('/login', (req, res) => {
+    return passport.authenticate('user', (err, user, info) => {
+        if (err) {
             vm = {
                 layout: 'index.handlebars',
                 error: true
             }
-            res.render('bookstore/index/login', vm);
+            return res.render('bookstore/index/login', vm);
         }
-    });
+
+        req.session.isLogged = true;
+        req.session.user = user;
+        var url = '/';
+        if (req.query.retUrl) {
+            url = req.query.retUrl;
+        }
+        if (!req.session.cartLayout)
+            req.session.cartLayout = [];
+        res.locals.layoutVM.isEmpty = true;
+        res.redirect(url);
+    })(req, res);
 });
+
 router.get('/register', (req, res) => {
     vm = {
         layout: 'index.handlebars'
@@ -517,9 +500,9 @@ router.post('/register', (req, res) => {
             else {
                 userRepo.addCustomer(obj).then(value => {
                     // req.session.isLogged = true;
-                        // req.session.user = obj;
-                        // console.log(obj);
-                        // res.redirect('/');
+                    // req.session.user = obj;
+                    // console.log(obj);
+                    // res.redirect('/');
                     // userRepo.getMaxID().then(r => {
                     //     console.log("------" + r);
                     // });
@@ -531,7 +514,7 @@ router.post('/register', (req, res) => {
                         res.redirect('/');
                     });
 
-                    
+
                 }).catch(err => {
                     res.end('fail');
                 });
@@ -698,6 +681,7 @@ router.get('/profile', checklogout, (req, res) => {
         res.render('bookstore/index/profile', vm);
     });
 });
+
 router.post('/profile', (req, res) => {
     req.body.id = req.session.user.id;
     //console.log(req.body);
@@ -863,12 +847,13 @@ router.get('/brands/:id', (req, res) => {
         res.render('bookstore/brands/index', vm);
     });
 });
+
 router.post('/brands/:id', (req, res) => {
     req.session.limit = req.body.limit;
     res.redirect('/brands/' + req.params.id);
 });
 
-router.get('/result', (req,res) => {
+router.get('/result', (req, res) => {
     res.redirect('/result/1');
 })
 
@@ -1002,6 +987,7 @@ router.get('/result/:page', (req, res) => {
     }
 
 });
+
 router.post('/result/:page', (req, res) => {
     req.session.limit = req.body.limit;
     res.redirect('/result/1?key=' + req.query.key);
@@ -1016,12 +1002,11 @@ router.get('/history', checklogout, (req, res) => {
             layout: 'index.handlebars',
             order: pRows,
             order_detail: cRows,
-            len: pRows.length==0,
+            len: pRows.length == 0,
         }
         res.render('bookstore/index/history', vm);
     });
 });
-
 
 router.get('/order', checklogout, (req, res) => {
     var p1 = orderRepo.single(req.query.id);
@@ -1036,4 +1021,5 @@ router.get('/order', checklogout, (req, res) => {
         res.render('bookstore/order/index', vm);
     });
 });
+
 module.exports = router;
