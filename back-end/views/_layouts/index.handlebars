@@ -48,7 +48,8 @@
 					<!-- Search -->
 					<div class="header-search">
 						<form action="/result/1" method="get">
-							<input name="key" class="input search-input" type="text" placeholder="Search entire store here...">
+							<input name="key" class="input search-input" type="text"
+								placeholder="Search entire store here...">
 							<button class="search-btn" type="submit">
 								<i class="fa fa-search"></i>
 							</button>
@@ -377,6 +378,15 @@
 		});
 	</script> {{{_sections.js}}}
 
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155595415-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-155595415-1');
+	</script>
 </body>
 
 </html>
