@@ -1,0 +1,301 @@
+ {{#section 'css'}} {{/section}} 
+ 
+ {{#section 'js'}}
+<script src="/assets/bookstore/js/JSbookstore/index.js"></script>
+<script type="text/javascript">
+
+</script> {{/section}}
+
+
+
+
+
+
+<!-- HOME -->
+<div id="home">
+    <!-- container -->
+    <div class="container">
+        <!-- ASIDE -->
+        <div id="aside" class="col-md-3" style="padding-top: 15px; padding-left: 0px !important;">
+            <!-- aside widget -->
+            <div class="aside">
+                <img style="max-width: 100%" class="img-a" src="/assets/bookstore/img/aside/01.jpg" alt="">
+            </div>
+            <div class="aside">
+                <img style="max-width: 100%" class="img-a" src="/assets/bookstore/img/aside/02.jpg" alt="">
+            </div>
+
+        </div>
+        <!-- /ASIDE -->
+        <!-- home wrap -->
+        <div class="home-wrap">
+            <!-- home slick -->
+            <div id="home-slick">
+                <!-- banner -->
+                <div class="banner banner-1">
+                    <img src="/assets/bookstore/img/banner/banner01.jpg" alt="">
+                </div>
+                <!-- /banner -->
+                <!-- banner -->
+                <div class="banner banner-1">
+                    <img src="/assets/bookstore/img/banner/banner02.png" alt="">
+                </div>
+                <!-- /banner -->
+                <!-- banner -->
+                <div class="banner banner-1">
+                    <img src="/assets/bookstore/img/banner/banner03.png" alt="">
+                </div>
+                <!-- /banner -->
+                <!-- banner -->
+                <div class="banner banner-1">
+                    <img src="/assets/bookstore/img/banner/banner04.jpg" alt="">
+                </div>
+                <!-- /banner -->
+                <!-- banner -->
+                <div class="banner banner-1">
+                    <img src="/assets/bookstore/img/banner/banner05.jpg" alt="">
+                </div>
+                <!-- /banner -->
+                <!-- banner -->
+                <div class="banner banner-1">
+                    <img src="/assets/bookstore/img/banner/banner06.jpg" alt="">
+                </div>
+                <!-- /banner -->
+                <!-- banner -->
+                <div class="banner banner-1">
+                    <img src="/assets/bookstore/img/banner/banner07.jpg" alt="">
+                </div>
+                <!-- /banner -->
+            </div>
+            <!-- /home slick -->
+        </div>
+        <!-- /home wrap -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /HOME -->
+
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <!-- section-title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">sách mới nhất</h2>
+                    <div class="pull-right">
+                        <div class="product-slick-dots-1 custom-dots"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /section-title -->
+
+            <!-- Product Slick -->
+            <div class="col-md-12 col-sm-6 col-xs-6">
+                <div class="row">
+                    <div id="product-slick-1" class="product-slick">
+                        {{#each latest}}
+                        <div class="product product-single">
+                            <div class="product-thumb">
+                                <div class="product-label">
+                                    {{#if Saling}}
+                                    <span class="sale">-{{Sale}}%</span>
+                                    {{/if}}
+                                    <span>New</span>
+                                </div>
+                                <a href="/products?id={{id}}">
+                                    <img src="/assets/img/1/{{Picture}}" alt="">
+                                </a>
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-price">
+                                    {{#if Saling}}
+                                    <a>{{number_format Saleprice}}đ</a>
+                                    <del class="product-old-price">{{number_format Price}}đ</del>
+                                    {{else}}
+                                    <a>{{number_format Price}}đ</a>
+                                    {{/if}}
+                                </h3>
+                                <div class="product-rating">
+                                    {{#each Star}}
+                                    <i class="fa fa-star"></i>
+                                    {{/each}}
+                                    {{#each notStar}}
+                                    <i class="fa fa-star-o empty"></i>
+                                    {{/each}}
+                                </div>
+                                <h2 class="product-name">
+                                    <a href="/products?id={{id}}">{{Name}}</a>
+                                </h2>
+                                {{!-- <div style="text-align: right;" class="product-btns">
+                                    <button id="" class="primary-btn add-to-cart" title="Add to cart">
+                                        <i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                </div> --}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <!-- /Product Slick -->
+        </div>
+        <!-- /row -->
+
+        <!-- row -->
+        <div class="row">
+            <!-- section-title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">sách bán chạy nhất</h2>
+                    <div class="pull-right">
+                        <div class="product-slick-dots-2 custom-dots"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /section-title -->
+
+            <!-- Product Slick -->
+            <div class="col-md-12 col-sm-6 col-xs-6">
+                <div class="row">
+                    <div id="product-slick-2" class="product-slick">
+                        {{#each sell}}
+                        <div class="product product-single">
+                            <div class="product-thumb">
+                                <div class="product-label">
+                                    {{#if Saling}}
+                                    <span class="sale">-{{Sale}}%</span>
+                                    {{/if}}
+                                    {{#if New}}
+                                    <span>New</span>
+                                    {{/if}}
+                                </div>
+                                <a href="/products?id={{id}}">
+                                    <img src="/assets/img/1/{{Picture}}" alt="">
+                                </a>
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-price">
+                                    {{#if Saling}}
+                                    <a>{{number_format Saleprice}}đ</a>
+                                    <del class="product-old-price">{{number_format Price}}đ</del>
+                                    {{else}}
+                                    <a>{{number_format Price}}đ</a>
+                                    {{/if}}
+                                </h3>
+                                <div class="product-rating">
+                                    {{#each Star}}
+                                    <i class="fa fa-star"></i>
+                                    {{/each}}
+                                    {{#each notStar}}
+                                    <i class="fa fa-star-o empty"></i>
+                                    {{/each}}
+                                </div>
+                                <h2 class="product-name">
+                                    <a href="/products?id={{id}}">{{Name}}</a>
+                                </h2>
+                                {{!-- <div style="text-align: right;" class="product-btns">
+                                    <button id="" class="primary-btn add-to-cart" title="Add to cart">
+                                        <i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                </div> --}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <!-- /Product Slick -->
+        </div>
+        <!-- /row -->
+
+        <!-- row -->
+        <div class="row">
+            <!-- section-title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">sách được xem nhiều nhất</h2>
+                    <div class="pull-right">
+                        <div class="product-slick-dots-3 custom-dots"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Slick -->
+            <div class="col-md-12 col-sm-6 col-xs-6">
+                <div class="row">
+                    <div id="product-slick-3" class="product-slick">
+                        {{#each bestview}}
+                        <div class="product product-single">
+                            <div class="product-thumb">
+                                <div class="product-label">
+                                    {{#if Saling}}
+                                    <span class="sale">-{{Sale}}%</span>
+                                    {{/if}}
+                                    {{#if New}}
+                                    <span>New</span>
+                                    {{/if}}
+                                </div>
+                                <a href="/products?id={{id}}">
+                                    <img src="/assets/img/1/{{Picture}}" alt="">
+                                </a>
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-price">
+                                    {{#if Saling}}
+                                    <a>{{number_format Saleprice}}đ</a>
+                                    <del class="product-old-price">{{number_format Price}}đ</del>
+                                    {{else}}
+                                    <a>{{number_format Price}}đ</a>
+                                    {{/if}}
+                                </h3>
+                                <div class="product-rating">
+                                    {{#each Star}}
+                                    <i class="fa fa-star"></i>
+                                    {{/each}}
+                                    {{#each notStar}}
+                                    <i class="fa fa-star-o empty"></i>
+                                    {{/each}}
+                                </div>
+                                <h2 class="product-name">
+                                    <a href="/products?id={{id}}">{{Name}}</a>
+                                </h2>
+                                {{!-- <div style="text-align: right;" class="product-btns">
+                                    <button id="" class="primary-btn add-to-cart" title="Add to cart">
+                                        <i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                </div> --}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <!-- /Product Slick -->
+        </div>
+        <!-- row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
+
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+
+
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <ul id="nxb" class="list-links3" style="padding-left: 22px;">
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+
+
+    </div>
+    <!-- /container -->
+</div>

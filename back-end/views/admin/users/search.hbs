@@ -1,0 +1,100 @@
+<div class="panel" id="spy5">
+    <div class="panel-heading">
+        <span class="panel-title">search result
+            <i style="color: red;">
+                <strong>{{count}}</strong>
+            </i>
+            user for
+            <i style="color: red;">
+                <strong>{{key}}</strong>
+            </i>
+        </span>
+    </div>
+    {{#if noUser}} 
+    {{else}}
+    <div class="panel-body pn">
+        <div class="table-responsive">
+
+            <div class="bs-component">
+                <table class="table table-bordered mbn">
+                    <colgroup>
+                        <col width="100px" />
+                        <col width="160px" />
+                        <col width="80px" />
+                        <col width="80px" />
+                        <col />
+                        <col width="120px" />
+                        <col width="200px" />
+                        <col width="60px" />
+                        <col width="60px" />
+                        <col width="100px" />
+                    </colgroup>
+                    <thead>
+                        <tr class="bg-primary">
+                            <th>Username</th>
+                            <th>Fullname</th>
+                            <th>DateOfBirth</th>
+                            <th>Sex</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            {{#if admin}}
+                            <th>
+                                <i class="fa fa-pencil"></i>
+                            </th>
+                            {{/if}}
+                            <th>
+                                <i class="fa fa-undo"></i>
+                            </th>
+                            {{#if admin}}
+                            <th>
+                                <i class="fa fa-flag"></i>
+                            </th>
+                            {{/if}}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each result}}
+                        <tr>
+                            <td>{{Username}}</td>
+                            <td>{{Fullname}}</td>
+                            <td>{{DOB}}</td>
+                            <td>{{Sex}}</td>
+                            <td>{{Address}}</td>
+                            <td>{{Phone}}</td>
+                            <td>{{Email}}</td>
+                            {{#if isAdmin}}
+                            <td>
+                                <a href="/admin/users/edit?id={{id}}" title="edit" class="btn btn-xs btn-info">
+                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                </a>
+                            </td>
+                            {{/if}}
+                            <td>
+                                <a href="/admin/users/resetpassword?id={{id}}" title="reset password" class="btn btn-xs btn-danger">
+                                    <i class="fa fa-undo"></i>
+                                </a>
+                            </td>
+                            {{#if active}}
+                            <td>
+                                <button title="actived" class="btn btn-xs btn-success" disabled>
+                                    actived
+                                </button>
+                            </td>
+                            {{/if}}
+                            {{#if block}}
+                            <td>
+                                <button title="blocked" class="btn btn-xs btn-danger" disabled>
+                                    blocked
+                                </button>
+                            </td>
+                            {{/if}}
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}

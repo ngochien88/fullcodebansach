@@ -1,0 +1,80 @@
+<div class="col-lg-12">
+    <div class="form-horizontal">
+        <section class="panel">
+            {{#with order}}
+            <div class="panel-heading col-sm-8">
+                <span class="panel-title">edit order {{id}} info</span>
+            </div>
+            <form action="" method="post">
+                <div id="user-detail-form" class="panel-body" style="padding-right:0px;">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Customer </label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <input disabled id="" name="customer" type="text" class="form-control" value="{{Fullname}}"/>
+                            <input type="hidden" name="id" value="{{id}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Date</label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <input disabled id="" name="date" type="text" class="form-control" value="{{moment Date format="DD/MM/YYYY"}}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Product</label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <textarea disabled name="description" rows="5" class="form-control">
+                                {{#each ../order_detail}}
+                                    {{Name}}(x{{Count}})
+                                {{/each}}
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Total</label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <input disabled id="" name="total" type="text" class="form-control" value="{{number_format Total}} đ" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Status</label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <select id = "" name="status" class="form-control" name="example">
+                                {{#is Status 0}}
+                                    <option selected="selected"value="0">Chưa giao</option>
+                                    <option value="1">Đang giao</option>
+                                    <option value="2">Đã giao</option>
+                                {{/is}}
+                                {{#is Status 1}}
+                                    <option value="0">Chưa giao</option>
+                                    <option selected="selected">Đang giao</option>
+                                    <option value="2">Đã giao</option>
+                                {{/is}}
+                                {{#is Status 2}}
+                                    <option value="0">Chưa giao</option>
+                                    <option value="1">Đang giao</option>
+                                    <option selected="selected" value="2">Đã giao</option>
+                                {{/is}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <footer class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <button type="submit" id="" class="btn btn-primary">
+                                <i style="cursor:pointer" class="fa fa-save"></i>
+                                SAVE
+                            </button>
+                            <a href="/admin/orders" id="" type="button" class="btn btn-default">
+                                <i class="fa fa-arrow-circle-left"></i>
+                                BACK
+                            </a>
+                        </div>
+                    </div>
+                </footer>
+            </form>
+            {{/with}}
+        </section>
+    </div>
+</div>

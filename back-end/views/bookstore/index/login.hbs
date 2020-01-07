@@ -1,0 +1,88 @@
+ {{#section 'js'}}
+<script type="text/javascript">
+    $('#notify').fadeIn('slow');
+    setTimeout(() => {
+        $('#notify').fadeOut(2500);
+        setTimeout(() => {
+            $('#notify').remove();
+        }, 1500);
+    }, 3000);
+</script> {{/section}}
+
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li class="active">Login</li>
+        </ul>
+    </div>
+</div>
+<!-- /BREADCRUMB -->
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <form id="checkout-form" class="clearfix" method="post">
+                <div class="col-md-6">
+                    <div class="shiping-methods">
+                        <div class="section-title">
+                            <h4 class="title">KHÁCH HÀNG MỚI</h4>
+                        </div>
+                        <div class="caption">
+                            <p>Bằng việc tạo tài khoản trên website chúng tôi, bạn sẽ có thể mua hàng và thanh toán nhanh hơn,
+                                lưu trữ nhiều địa chỉ giao hàng, có thể xem và theo dõi trạng thái đơn hàng, và còn nhiều
+                                tiện ích khác nữa...
+                                <p>
+                        </div>
+                        <a href="/register" class="primary-btn add-to-cart">TẠO TÀI KHOẢN</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="section-title">
+                        <h4 class="title">KHÁCH HÀNG CŨ</h4>
+                    </div>
+                    <div class="caption">
+                        <p>Nếu bạn đã có tài khoản trên website của chúng tôi, vui lòng đăng nhập!</p>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="font-weak">Tên đăng nhập *</label>
+                        <input class="input" type="text" name="username" placeholder="Username">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="font-weak">Mật khẩu *</label>
+                        <input class="input" type="password" name="password" placeholder="Password">
+                    </div>
+                    <p align="right">(*) bắt buộc</p>
+                    <a href="javascript:;" class="btn-link" style="color: red">Quên mật khẩu?</a>
+                    <button type="submit" class="primary-btn">ĐĂNG NHẬP</button>
+                </div>
+            </form>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
+
+
+{{#if error}}
+<div class="alert alert-danger" id="notify" style="
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 99999;
+                display: none;
+                ">
+    <strong>ERROR!!!</strong>
+    username or password is incorrect
+</div>
+{{/if}}

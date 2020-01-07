@@ -1,0 +1,43 @@
+ {{#section 'css'}} {{/section}} {{#section 'js'}}
+<script type="text/javascript">
+    $('#notify').fadeIn('slow');
+    setTimeout(() => {
+        $('#notify').fadeOut(2500);
+        setTimeout(() => {
+            $('#notify').remove();
+        }, 1500);
+    }, 3000);
+</script> {{/section}} {{#with category}}
+<div class="panel" id="spy5">
+    <div class="panel-heading">
+        <span class="panel-title">confirm to delete category
+            <strong>
+                <i>{{Name}}</i>
+            </strong>
+        </span>
+    </div>
+    <div class="panel-body pn">
+        <form action="" method="post">
+            <input type="hidden" name="id" value="{{id}}">
+            <div class="table-responsive">
+                <div class="bs-component">
+                    <button type="submit" title="reset" class="btn btn-md btn-danger">
+                        delete
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{{/with}} 
+{{#if error}}
+<div class="alert alert-danger" id="notify" style="
+                position: fixed;
+                top: 80px;
+                right: 430px;
+                z-index: 99999;
+                display: none;
+                ">
+    Loại sách {{category.Name}} đang được sử dụng nên không được xóa!!!
+</div>
+{{/if}}

@@ -1,0 +1,71 @@
+<div class="panel" id="spy5">
+    <div class="panel-heading">
+        <span class="panel-title"><i style="color: red;">{{count}} </i> result for <i style="color: red;">{{key}}</i> </span>
+    </div>
+    {{#if isEmpty}}
+    {{else}}
+    <div class="panel-body pn">
+        <div class="table-responsive">
+
+            <div class="bs-component">
+                <table class="table table-bordered mbn">
+                    <colgroup>
+                        <col />
+                        <col width="80px" />
+                        <col width="110px" />
+                        <col width="110px" />
+                        <col width="120px" />
+                        <col width="70px" />
+                        <col width="100px" />
+                        <col width="150px" />
+                        <col width="60px" />
+                        <col width="60px" />
+                    </colgroup>
+                    <thead>
+                        <tr class="bg-primary">
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                            <th>Brand</th>
+                            <th>Date</th>
+                            <th>Sale</th>
+                            <th>Price</th>
+                            <th>Creator</th>
+                            <th>
+                                <i class="fa fa-pencil"></i>
+                            </th>
+                            <th>
+                                <i class="fa fa-trash"></i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                        <tr>
+                            <td>{{Name}}</td>
+                            <td>{{Amount}}</td>
+                            <td>{{cateName}}</td>
+                            <td>{{braName}}</td>
+                            <td>{{Date}}</td>
+                            <td>{{Sale}}</td>
+                            <td>{{Price}}</td>
+                            <td>{{creatorName}}</td>
+                            <td>
+                                <a href="/admin/products/edit?id={{id}}" title="edit" class="btn btn-xs btn-info">
+                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/admin/products/delete?id={{id}}" title="delete" class="btn btn-xs btn-danger">
+                                    <i class="ace-icon fa fa-trash bigger-120"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>

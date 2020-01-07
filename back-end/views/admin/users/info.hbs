@@ -1,0 +1,99 @@
+ {{#section 'css'}}
+<link rel="stylesheet" type="text/css" href="/assets/admin/bootstrap-datepicker/css/bootstrap-datepicker.min.css"> {{/section}} {{#section 'js'}}
+<script src="/assets/admin/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $('#txtDOB').datepicker({
+        format: 'd/m/yyyy',
+        autoclose: true
+    });
+    var sex = $('#sex').val();
+    $(`#${sex}`).hide();
+</script> {{/section}}
+
+
+
+<div class="col-lg-12">
+    <div class="form-horizontal">
+        <section class="panel">
+            {{#with users}}
+            <div class="panel-heading col-sm-8">
+                <span class="panel-title">{{Fullname}}</span>
+            </div>
+            <form action="" method="post">
+                <div id="user-detail-form" class="panel-body" style="padding-right:0px;">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Username </label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <input id="" name="username" type="text" class="form-control" value="{{Username}}" readonly/>
+                            <input type="hidden" name="id" value="{{id}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Fullname </label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <input id="" name="fullname" type="text" class="form-control" value="{{Fullname}}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">CMND </label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <input id="" name="cmnd" type="text" class="form-control" value="{{CMND}}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">DateOfBirth</label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <input id="txtDOB" name="dob" type="text" class="form-control" value="{{DOB}}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Sex</label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <select class="form-control" name="sex" >
+                                <option id="sex">{{Sex}}</option>
+                                <option id="Male">Male</option>
+                                <option id="Female">Female</option>
+                                <option id="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Address</label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <input id="txtWebsite" name="address" type="text" class="form-control" value="{{Address}}" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Phone </label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <input id="txtWebsite" name="phone" type="text" class="form-control" value="{{Phone}}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Email </label>
+                        <div class="col-sm-9" style="width: 700px;">
+                            <input id="txtWebsite" name="email" type="text" class="form-control" value="{{Email}}" />
+                        </div>
+                    </div>
+                </div>
+                {{/with}}
+                <footer class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <button type="submit" id="" class="btn btn-primary">
+                                <i style="cursor:pointer" class="fa fa-save"></i>
+                                SAVE
+                            </button>
+                            <a id="btnback" href="{{layoutVM.preUrl}}" type="button" class="btn btn-default">
+                                <i class="fa fa-arrow-circle-left"></i>
+                                BACK
+                            </a>
+                        </div>
+                    </div>
+                </footer>
+            </form>
+            
+        </section>
+    </div>
+</div>

@@ -1,0 +1,211 @@
+ {{#section 'css'}}
+<link rel="stylesheet" href="/assets/bookstore/css/productCategory.css"> {{/section}} {{#section 'js'}}
+<script src="/assets/bookstore/js/JSbookstore/index.js"></script>
+<script type="text/javascript">
+    $('#cbb1').change(function () {
+        $('#frm1').submit();
+    });
+
+    $('#cbb2').change(function () {
+        $('#frm2').submit();
+    });
+    var option = [9, 18, 27];
+    for (let i = 0; i < option.length; i++) {
+        if (option[i] != $('#cbb1').val()) {
+            $('#cbb1').append(`<option value="${option[i]}">${option[i]}</option>`);
+        }
+        if (option[i] != $('#cbb2').val()) {
+            $('#cbb2').append(`<option value="${option[i]}">${option[i]}</option>`);
+        }
+    }
+</script> {{/section}}
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="javascript:;">Search</a>
+            </li>
+            <li class='active'>Result</li>
+        </ul>
+    </div>
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- section -->
+<div id="section" class="section">
+    <!-- container -->
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div id="aside" class="col-md-3">
+                <!-- aside widget -->
+                <div class="aside">
+                    <img style="max-width: 100%" class="img-a" src="/assets/bookstore/img/aside/01.jpg" alt="">
+                </div>
+                <div class="aside">
+                    <img style="max-width: 100%" class="img-a" src="/assets/bookstore/img/aside/02.jpg" alt="">
+                </div>
+
+            </div>
+
+            <!-- MAIN -->
+            <div id="main" class="col-md-9">
+                <!-- store top filter -->
+                <div class="store-filter clearfix">
+                    <div class="pull-left">
+                        <span style="font-size: 24px; text-align: center;">
+                            <i style="color: red !important;">
+                                <strong>{{count}}</strong>
+                            </i>
+                            result for
+                            <i style="color: red !important;">
+                                <strong>{{key}}</strong>
+                            </i>
+                        </span>
+                    </div>
+                    {{#if empty}} {{else}}
+                    <div class="pull-right">
+                        <div class="page-filter">
+                            <form id="frm1" action="" method="post">
+                                <span class="text-uppercase">Show:</span>
+                                <select name="limit" id="cbb1" class="input">
+                                    <option value="{{limit}}">{{limit}}</option>
+                                </select>
+                            </form>
+                        </div>
+                        <ul class="store-pages">
+                            <li>
+                                <span class="text-uppercase">Page:</span>
+                            </li>
+                            <span id="page-number">
+                                <!-- Page number -->
+                                <li>
+                                    {{#each page_numbers}} {{#if isCurPage}}
+                                    <li>
+                                        <a class="cur-page" href="/result/{{value}}?key={{key}}" style="color:#F8694A">{{value}}</a>
+                                    </li>
+                                    {{else}}
+                                    <li>
+                                        <a href="/result/{{value}}?key={{key}}">{{value}}</a>
+                                    </li>
+                                    {{/if}} {{/each}}
+                                </li>
+                            </span>
+
+                        </ul>
+                    </div>
+                    {{/if}}
+                </div>
+                <!-- /store top filter -->
+                    {{#if empty}}
+                    {{else}}
+                <!-- STORE -->
+                <div id="store">
+                    <!-- row -->
+                    <div class="row">
+                        {{#each result}}
+                        <!-- Product Single -->
+                        <div class="col-md-4 col-sm-6 col-xs-6">
+                            <div class="product product-single">
+                                <div class="product-thumb">
+                                    <div class="product-label">
+                                        {{#if Saling}}
+                                        <span class="sale">
+                                            -{{Sale}}%
+                                        </span>
+                                        {{/if}} {{#if New}}
+                                        <span>New</span>
+                                        {{/if}}
+                                    </div>
+                                    <a href="/products?id={{id}}">
+                                        <img src="/assets/img/1/{{Picture}}" alt="{{Name}}">
+                                    </a>
+                                </div>
+                                <div class="product-body">
+                                    <h3 class="product-price">
+                                        {{#if Saling}}
+                                        <a>{{number_format Saleprice}}đ </a>
+                                        <del class="product-old-price">{{number_format Price}}đ</del>
+                                        {{else}}
+                                        <a>{{number_format Price}}đ</a>
+                                        {{/if}}
+
+                                    </h3>
+                                    <div class="product-rating">
+                                        {{#each Star}}
+                                        <i class="fa fa-star"></i>
+                                        {{/each}} {{#each notStar}}
+                                        <i class="fa fa-star-o empty"></i>
+                                        {{/each}}
+                                    </div>
+                                    <h2 class="product-name">
+                                        <a href="/product?id={{id}}">{{Name}}</a>
+                                    </h2>
+                                    <div class="product-btns" style="text-align: right">
+                                        <button class="primary-btn add-to-cart" id="{{id}}">
+                                            <i class="fa fa-shopping-cart"></i> Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Product Single -->
+                        {{/each}}
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /STORE -->
+                    {{/if}}
+                
+                {{#if empty}}
+                {{else}}
+                <!-- store bottom filter -->
+                <div class="store-filter clearfix">
+                    
+                    <div class="pull-right">
+                        <div class="page-filter">
+                            <form id="frm2" action="" method="post">
+                                <span class="text-uppercase">Show:</span>
+                                <select class="input" name="limit" id="cbb2">
+                                    <option value="{{limit}}">{{limit}}</option>
+                                </select>
+                            </form>
+                        </div>
+                        <ul class="store-pages">
+                            <li>
+                                <span class="text-uppercase">Page:</span>
+                            </li>
+                            <span id="page-number">
+                                <!-- Page number -->
+                                <li>
+                                    {{#each page_numbers}} {{#if isCurPage}}
+                                    <li>
+                                        <a class="cur-page" href="/result/{{value}}?key={{key}}" style="color:#F8694A">{{value}}</a>
+                                    </li>
+                                    {{else}}
+                                    <li>
+                                        <a href="/result/{{value}}?key={{key}}">{{value}}</a>
+                                    </li>
+                                    {{/if}} {{/each}}
+                                </li>
+                            </span>
+
+                        </ul>
+                    </div>
+                    
+                </div>
+                <!-- /store bottom filter -->
+                {{/if}}
+            </div>
+            <!-- /MAIN -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->

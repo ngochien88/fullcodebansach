@@ -1,0 +1,124 @@
+<div class="panel" id="spy5">
+    <div class="panel-heading">
+        <span class="panel-title">order list</span>
+
+    </div>
+{{!--     <div class="col-md-12 text-right" style="padding-right: 1px; margin-bottom: 5px;">
+        <a id="add" href="/admin/category/add" class="btn btn-primary">Thêm
+            <i class="fa fa-plus"></i>
+        </a>
+    </div> --}}
+
+    <div class="panel-body pn">
+        <div class="table-responsive">
+            <div class="bs-component">
+                <table class="table table-bordered mbn">
+                    <colgroup>
+                        <col width="150px" />
+                        <col width="80px" />
+                        <col />
+                        <col width="100px" />
+                        <col width="110px"/>
+                        <col width="80px" />
+                        <col width="80px" />
+                    </colgroup>
+                    <thead>
+                        <tr class="bg-primary">
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Products</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>
+                                <i class="fa fa-pencil"></i>
+                            </th>
+                            <th>
+                                <i class="fa fa-trash"></i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each orders}}
+                        <tr>
+                            <td>
+                                {{#each ../userName}}
+                                    {{#is id ../Customer}}
+                                        {{Fullname}}
+                                    {{/is}}
+                                {{/each}}
+                            </td>
+                            <td>{{moment Date format="DD/MM/YYYY"}}</td>
+                            <td>
+                                {{#each ../order_detail}}
+                                    {{#is OrderID ../id}}
+                                        {{Name}}(x{{Count}})
+                                        <br/>
+                                    {{/is}}
+                                {{/each}}
+                            </td>
+                            <td>{{number_format Total}} đ</td>
+                            {{#is Status 0}}<td style="color: red">CHƯA GIAO</td>{{/is}}
+                            {{#is Status 1}}<td style="color: orange">ĐANG GIAO</td>{{/is}}
+                            {{#is Status 2}}<td style="color: green">ĐÃ GIAO</td>{{/is}}
+                            <td>
+                                <a href="/admin/orders/edit?id={{id}}" title="edit {{id}}" class="btn btn-xs btn-info">
+                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="" title="delete {{id}}" class="btn btn-xs btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#if pagination}}
+<div class="text-center">
+    <ul class="pagination text-center">
+        {{#with firstPage}}
+        {{#if isFirstPage}}
+        <li class="page-item disabled">
+            <a class="page-link" href="javascript:;">Previous</a>
+        </li>
+        {{else}}
+        <li class="page-item ">
+            <a class="page-link" href="?page={{value}}">Previous</a>
+        </li>
+        {{/if}}
+        {{/with}}
+
+
+        {{#each page_numbers}}
+        {{#if isCurPage}}
+        <li class="page-item active">
+            <a class="page-link" href="javascript:;">{{value}}</a>
+        </li>
+        {{else}}
+        <li class="page-item ">
+            <a class="page-link" href="?page={{value}}">{{value}}</a>
+        </li>
+        {{/if}} 
+        {{/each}}
+
+
+        {{#with lastPage}}
+        {{#if isLastPage}}
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Next</a>
+        </li>
+        {{else}}
+        <li class="page-item">
+            <a class="page-link" href="?page={{value}}">Next</a>
+        </li>
+        {{/if}}
+        {{/with}}
+    </ul>
+</div>
+{{/if}}

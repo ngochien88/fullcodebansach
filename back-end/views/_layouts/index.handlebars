@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>BOOKSTORE.COM</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="/assets/bookstore/css/bootstrap.min.css" />
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="/assets/bookstore/css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="/assets/bookstore/css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="/assets/bookstore/css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/assets/bookstore/css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="/assets/bookstore/css/style.css" />
+	<link rel="stylesheet" href="/assets/bookstore/css/index.css">
+	<link rel="icon" type="image/x-icon" href="/assets/bookstore/img/B.png"> {{{_sections.css}}}
+</head>
+
+<body>
+	<!-- HEADER -->
+	<header>
+		<!-- header -->
+		<div id="header">
+			<div class="container">
+				<div class="pull-left">
+					<!-- Logo -->
+					<div class="header-logo">
+						<a class="logo" href="/">
+							<img src="/assets/bookstore/img/logo.png" alt="">
+						</a>
+					</div>
+					<!-- /Logo -->
+
+					<!-- Search -->
+					<div class="header-search">
+						<form action="/result/1" method="get">
+							<input name="key" class="input search-input" type="text" placeholder="Search entire store here...">
+							<button class="search-btn" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</form>
+					</div>
+					<!-- /Search -->
+				</div>
+				<div class="pull-right">
+					<ul class="header-btns">
+						<!-- Account -->
+						<li class="header-account dropdown default-dropdown">
+							{{#if layoutVM.isLogged}}
+							<div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+								<div class="header-btns-icon">
+									<i class="fa fa-user-o"></i>
+								</div>
+								<strong class="text-uppercase">&nbsp;{{layoutVM.curUser.Username}}
+									<i class="fa fa-caret-down"></i>
+								</strong>
+							</div>
+							<a id="btnLogout" class="text-uppercase btn btn-xs">logout</a>
+							<form id="frmLogout" action="/logout" method="post"></form>
+							{{else}}
+							<a href="/login" class="text-uppercase btn btn-default">Login</a>/
+							<a href="/register" class="text-uppercase btn btn-default">join</a>
+							{{/if}} {{#if layoutVM.isLogged}}
+							<ul class="custom-menu">
+								<li>
+									<a href="/profile">
+										<i class="fa fa-user-o"></i> THÔNG TIN</a>
+								</li>
+								<li>
+									<a href="/changepassword">
+										<i class="fa fa-lock"></i> đổi mật khẩu</a>
+								</li>
+								<li>
+									<a href="/history">
+										<i class="fa fa-history"></i> LỊCH SỬ MUA HÀNG</a>
+								</li>
+							</ul>
+							{{/if}}
+						</li>
+
+						<!-- /Account -->
+
+						{{#if layoutVM.isLogged}}
+						<!-- Cart -->
+						<li style="float: right !important;" class="header-cart dropdown default-dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+								<div id="qty" class="header-btns-icon">
+									<i class="fa fa-shopping-cart"></i>
+
+								</div>
+								<strong class="text-uppercase">My Cart</strong>
+								<br>
+								<div style="width: 140px;" id="totalcost">
+									{{number_format layoutVM.total}}đ
+								</div>
+							</a>
+
+							<div class="custom-menu">
+								<div id="shopping-cart">
+									<div id="cart" class="shopping-cart-list">
+										{{#if layoutVM.isEmpty}} Cart is empty {{else}} {{#each layoutVM.cartLayout}}
+										<div id="divnb02" class="product product-widget">
+											<div class="product-thumb">
+												<img id="imgCart" src="/assets/img/1/{{Picture}}" alt="">
+											</div>
+											<div class="product-body">
+												<h3 class="product-price">{{number_format Price}}đ
+													<span class="qty">x{{Count}}</span>
+												</h3>
+												<h2 class="product-name">
+													<a href="/products?id={{id}}">{{Name}}</a>
+												</h2>
+											</div>
+											{{!--
+											<button id="deletenb02" class="cancel-btn">
+												<i class="fa fa-trash"></i>
+											</button> --}}
+										</div>
+										{{/each}} {{/if}}
+									</div>
+									<div class="shopping-cart-btns">
+										<a href="/cart" class="main-btn">View Cart</a>
+										{{#if layoutVM.isEmpty}}
+										<a href="javascript:;" class="primary-btn" disabled="disabled">Checkout
+											<i class="fa fa-arrow-circle-right"></i>
+										</a>
+										{{else}}
+										<a href="/cart/checkout" class="primary-btn">Checkout
+											<i class="fa fa-arrow-circle-right"></i>
+										</a>
+										{{/if}}
+
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- /Cart -->
+						{{/if}}
+						<!-- Mobile nav toggle-->
+						<li class="nav-toggle">
+							<button class="nav-toggle-btn main-btn icon-btn">
+								<i class="fa fa-bars"></i>
+							</button>
+						</li>
+						<!-- / Mobile nav toggle -->
+					</ul>
+				</div>
+			</div>
+			<!-- header -->
+		</div>
+		<!-- container -->
+	</header>
+	<!-- /HEADER -->
+	<!-- NAVIGATION -->
+	<div id="navigation">
+		<!-- container -->
+		<div class="container">
+			<div id="responsive-nav">
+				<!-- category nav -->
+				<div class="category-nav show-on-click">
+					<span class="category-header">DANH MỤC
+						<i class="fa fa-list"></i>
+					</span>
+					<ul class="category-list">
+						{{#each layoutVM.categories}}
+						<li class="dropdown side-dropdown">
+							<a href="/category/{{id}}" class="dropdown-toggle" aria-expanded="true">{{Name}}</a>
+						</li>
+						{{/each}}
+					</ul>
+				</div>
+				<!-- /category nav -->
+
+				<!-- menu nav -->
+				<div class="menu-nav">
+					<span class="menu-header">Menu
+						<i class="fa fa-bars"></i>
+					</span>
+					<ul class="menu-list">
+						<li class="dropdown mega-dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">NHÀ XUẤT BẢN</a>
+							<div class="custom-menu">
+								<div class="row">
+									<div class="col-md-3">
+										<ul class="list-links">
+											{{#each layoutVM.brand1}}
+											<li>
+												<a href="/brands/{{id}}">{{Name}}</a>
+											</li>
+											{{/each}}
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+									<div class="col-md-3">
+										<ul class="list-links">
+											{{#each layoutVM.brand2}}
+											<li>
+												<a href="/brands/{{id}}">{{Name}}</a>
+											</li>
+											{{/each}}
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+									<div class="col-md-3">
+										<ul class="list-links">
+											{{#each layoutVM.brand3}}
+											<li>
+												<a href="/brands/{{id}}">{{Name}}</a>
+											</li>
+											{{/each}}
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+									<div class="col-md-3">
+										<ul class="list-links">
+											{{#each layoutVM.brand4}}
+											<li>
+												<a href="/brands/{{id}}">{{Name}}</a>
+											</li>
+											{{/each}}
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+								</div>
+							</div>
+					</ul>
+				</div>
+				<!-- menu nav -->
+			</div>
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /NAVIGATION -->
+	{{{body}}}
+	<!-- FOOTER -->
+	<footer id="footer" class="section section-grey">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!-- footer widget -->
+				<div class="col-md-3 col-sm-6 col-xs-6">
+					<div class="footer">
+						<!-- footer logo -->
+						<div class="footer-logo">
+							<a class="logo" href="/">
+								<img src="/assets/bookstore/img/logo.png" alt="">
+							</a>
+						</div>
+						<!-- /footer logo -->
+
+						<p>Tòa nhà I Town, 227 Nguyễn Văn Cừ Quận 5 TP HCM</p>
+					</div>
+				</div>
+				<!-- /footer widget -->
+
+				<!-- footer widget -->
+				<div class="col-md-3 col-sm-6 col-xs-6">
+					<div class="footer">
+						<h3 class="footer-header">dịch vụ</h3>
+						<ul class="list-links">
+							<li>
+								<a href="javascript:;">Điều khoản sử dụng</a>
+							</li>
+							<li>
+								<a href="javascript:;">chính sách bảo mật</a>
+							</li>
+							<li>
+								<a href="javascript:;">Giới thiệu BookStore</a>
+							</li>
+							<li>
+								<a href="javascript:;">Hệ thống trung tâm - nhà sách</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /footer widget -->
+
+				<div class="clearfix visible-sm visible-xs"></div>
+
+				<!-- footer widget -->
+				<div class="col-md-3 col-sm-6 col-xs-6">
+					<div class="footer">
+						<h3 class="footer-header">Hỗ trợ</h3>
+						<ul class="list-links">
+							<li>
+								<a href="javascript:;">Chính sách đổi - trả</a>
+							</li>
+							<li>
+								<a href="javascript:;">Chính sách khách sỉ</a>
+							</li>
+							<li>
+								<a href="javascript:;">Phương thức vận chuyển</a>
+							</li>
+							<li>
+								<a href="javascript:;">Phương thức thanh toán</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /footer widget -->
+				<!-- footer subscribe -->
+				<div class="col-md-3 col-sm-6 col-xs-6">
+					<div class="footer">
+						<h3 class="footer-header">liên hệ</h3>
+						<ul class="list-links">
+							<li>
+								<a href="javascript:;">
+									<i class="fa fa-map-marker">&nbsp;&nbsp;&nbsp;</i>227 Nguyễn Văn Cừ Quận 5 TP HCM
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<i class="fa fa-envelope">&nbsp;&nbsp;</i>bookstore@gmail.com
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<i class="fa fa-facebook-square">&nbsp;&nbsp;</i>facebook.com/bookstore
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<i class="fa fa-phone-square">&nbsp;&nbsp;</i>19001000
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /footer subscribe -->
+			</div>
+			<!-- /row -->
+			<hr>
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<!-- footer copyright -->
+					<div class="footer-copyright">
+						THE BEST ONLINE BOOK STORE FOR YOU - BOOKSTORE WITH LOVE
+					</div>
+					<!-- /footer copyright -->
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</footer>
+	<!-- /FOOTER -->
+
+	<!-- jQuery Plugins -->
+
+	<script src="/assets/bookstore/js/jquery.min.js"></script>
+	<script src="/assets/bookstore/js/bootstrap.min.js"></script>
+
+	<script src="/assets/bookstore/js/slick.min.js"></script>
+	<script src="/assets/bookstore/js/nouislider.min.js"></script>
+	<script src="/assets/bookstore/js/jquery.zoom.min.js"></script>
+
+	<script src="/assets/bookstore/js/main.js"></script>
+	<script>
+		$('#btnLogout').click(function () {
+			$('#frmLogout').submit();
+		});
+	</script> {{{_sections.js}}}
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a>Account</a>
+            </li>
+            <li class="active">Đơn Hàng Của Tôi</li>
+        </ul>
+    </div>
+</div>
+
+<div id="section" class="section">
+    <!-- container -->
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-3">
+                <!-- aside widget -->
+                <div class="aside">
+                    <h3 class="aside-title">TÀI KHOẢN</h3>
+                    <ul class="list-links">
+                        <li>
+                            <a href="/profile">Thông tin tài khoản</a>
+                        </li>
+                        <li>
+                            <a href="/cart">Quản lý giỏ hàng</a>
+                        </li>
+                        <li>
+                            <a href="/changepassword">Đổi mật khẩu</a>
+                        </li>
+                        <li>
+                            <a href="/history">Lịch sử mua hàng</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /aside widget -->
+                <!-- aside widget -->
+                <div class="aside">
+                    <img style="max-width: 100%" class="img-a" src="/assets/bookstore/img/aside/01.jpg" alt="">
+                </div>
+                <div class="aside">
+                    <img style="max-width: 100%" class="img-a" src="/assets/bookstore/img/aside/02.jpg" alt="">
+                </div>
+            </div>
+            <!-- /ASIDE -->
+
+            <!-- MAIN -->
+            <div id="main" class="col-md-9">
+                <form id="checkout-form" class="clearfix">
+                    <div class="col-md-12">
+                        <div class="shiping-methods">
+                            <div class="section-title">
+                                <h4 class="title">TÌNH TRẠNG ĐƠN HÀNG</h4>
+                            </div>
+                            <div>
+                                {{#is order.Status 0}}Chưa giao{{/is}}
+                                {{#is order.Status 1}}Đang giao{{/is}}
+                                {{#is order.Status 2}}Đã giao{{/is}}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="col-md-12">
+                        <div class="order-summary clearfix">
+                            <div class="section-title">
+                                <h4 class="title">DANH SÁCH SẢN PHẨM</h4>
+                            </div>
+                            <table class="shopping-cart-table table">
+                                <thead>
+                                    <tr>
+                                        <th>Hình ảnh</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th class="text-center">Số Lượng</th>
+                                        <th class="text-right">Giá</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each order_detail}}
+                                    <tr id="{{Product}}">
+                                        <td style="width: 10%" class="thumb"><img src="/assets/img/1/{{Picture}}" alt=""></td>
+                                        <td style="width: 50%" class="details">
+                                            <a href="/products?id={{Product}}">{{Name}}</a>
+                                        </td>
+                                        <td id="{{Product}}" class="qty text-center"><a value="{{Count}}">{{Count}}</a></td>
+                                        <td id="{{Product}}" class="total text-right">
+                                            <strong id="total-price" class="primary-color">{{number_format Price}}</strong><b class="primary-color">đ </b>
+                                        </td>
+                                    </tr>   
+                                    {{/each}}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="empty" colspan="2"></th>
+                                        <th colspan="1">TỔNG SỐ TIỀN</th>
+                                        <th id="final-total" colspan="1" class="total text-right">{{number_format order.Total}}đ</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

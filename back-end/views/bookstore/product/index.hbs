@@ -1,0 +1,205 @@
+ {{#section 'css'}}
+<link rel="stylesheet" href="/assets/bookstore/css/productPage.css"> {{/section}} {{#section 'js'}}
+<script src="/assets/bookstore/js/JSbookstore/index.js"></script>
+<script type="text/javascript">
+
+</script> {{/section}}
+
+
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            {{#with product}}
+            <li>
+                <a href="javascript:;">{{CatName}}</a>
+            </li>
+            <li class="active">{{Name}}</li>
+            {{/with}}
+        </ul>
+    </div>
+</div>
+
+<div id="main-section" class="section">
+    <!-- container -->
+
+    <!-- /container -->
+    {{#with product}}
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!--  Product Details -->
+            <div class="product product-details clearfix">
+                <div class="col-md-4">
+                    <img src="/assets/img/1/{{Picture}}" alt="">
+                </div>
+                <div class="col-md-8">
+                    <div class="product-body">
+
+                        <div class="product-label">
+                            {{#if isSaling}}
+                            <span class="sale">-{{Sale}}%</span>
+                            {{/if}} {{#if New}}
+                            <span>New</span>
+                            {{/if}}
+                        </div>
+
+                        <h2 class="product-name">{{Name}}</h2>
+                        {{#if isSaling}}
+                        <h3 class="product-price">{{number_format newPrice}}đ
+                            <del class="product-old-price">{{number_format Price}}đ</del>
+                        </h3>
+                        {{else}}
+                        <h3 class="product-price">{{number_format Price}}đ
+                        </h3>
+                        {{/if}}
+                        <div>
+                            <div class="product-rating">
+                                {{#each Star}}
+                                <i class="fa fa-star"></i>
+                                {{/each}} {{#each notStar}}
+                                <i class="fa fa-star-o empty"></i>
+                                {{/each}}
+                            </div>
+                            <a>{{View}} Lượt Xem</a>
+                        </div>
+                        <p>
+                            <strong>Số Lượng:</strong> {{Amount}} cuốn</p>
+                        <p>
+                            <strong>Đã mua:</strong> {{Sell}} cuốn</p>
+                        <p>
+                            <strong>Loại:</strong> {{CatName}}</p>
+                        <p>
+                            <strong>Xuất Xứ:</strong> {{Origin}}</p>
+                        <p>
+                            <strong>Nhà Xuất Bản:</strong> {{BraName}}</p>
+                        <p>{{Description}}</p>
+                        <hr> {{/with}} {{#if layoutVM.isLogged}}
+                        <form action="/cart/add" method="post">
+                            <div class="product-btns">
+                                <input type="hidden" name="proId" value="{{product.id}}">
+                                <input type="hidden" name="count" value="1">
+                                <button type="submit" class="primary-btn add-to-cart" id="01">
+                                    <i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                            </div>
+                        </form>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            <!-- /Product Details -->
+
+        </div>
+        <!-- /row -->
+    </div>
+</div>
+
+<div id="section1" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">SẢN PHẨM CÙNG LOẠI</h2>
+                </div>
+            </div>
+            <!-- section title -->
+
+            {{#each category}}
+            <!-- Product Single -->
+            <div class="col-md-2 col-sm-6 col-xs-6">
+                <div class="product product-single">
+                    <div class="product-thumb">
+                        <div class="product-label">
+                            {{#if Saling}}
+                            <span class="sale">-{{Sale}}%</span>
+                            {{/if}} {{#if New}}
+                            <span>New</span>
+                            {{/if}}
+                        </div>
+                        <a href="/products?id={{id}}">
+                            <img src="/assets/img/1/{{Picture}}" alt="">
+                        </a>
+                    </div>
+                    <div class="product-body">
+                        {{#if Saling}}
+                        <h3 class="product-price">{{number_format Saleprice}}đ
+                            <del class="product-old-price">{{number_format Price}}đ</del>
+                        </h3>
+                        {{else}}
+                        <h3 class="product-price">{{number_format Price}}đ
+                        </h3>
+                        {{/if}}
+                        <h2 class="product-name">
+                            <a href="/products?id={{id}}">{{Name}}</a>
+                        </h2>
+                        {{!--
+                        <div class="product-btns">
+                            <button class="primary-btn add-to-cart" id="03">
+                                <i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            <!-- /Product Single -->
+        </div>
+        <!-- /row -->
+    </div>
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">SẢN PHẨM CÙNG NHÀ XUẤT BẢN</h2>
+                </div>
+            </div>
+            <!-- section title -->
+
+            {{#each brand}}
+            <!-- Product Single -->
+            <div class="col-md-2 col-sm-6 col-xs-6">
+                <div class="product product-single">
+                    <div class="product-thumb">
+                        <div class="product-label">
+                            {{#if Saling}}
+                            <span class="sale">-{{Sale}}%</span>
+                            {{/if}} {{#if New}}
+                            <span>New</span>
+                            {{/if}}
+                        </div>
+                        <a href="/products?id={{id}}">
+                            <img src="/assets/img/1/{{Picture}}" alt="">
+                        </a>
+                    </div>
+                    <div class="product-body">
+                        {{#if Saling}}
+                        <h3 class="product-price">{{number_format Saleprice}}đ
+                            <del class="product-old-price">{{number_format Price}}đ</del>
+                        </h3>
+                        {{else}}
+                        <h3 class="product-price">{{number_format Price}}đ
+                        </h3>
+                        {{/if}}
+                        <h2 class="product-name">
+                            <a href="/products?id={{id}}">{{Name}}</a>
+                        </h2>
+                        {{!--
+                        <div class="product-btns">
+                            <button class="primary-btn add-to-cart" id="03">
+                                <i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+            <!-- /Product Single -->
+            {{/each}}
+        </div>
+        <!-- /row -->
+    </div>
+</div>

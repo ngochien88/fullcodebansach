@@ -1,0 +1,150 @@
+{{#section 'css'}}
+<link rel="stylesheet" type="text/css" href="/assets/admin/bootstrap-datepicker/css/bootstrap-datepicker.min.css"> 
+<style>
+    .form-group {
+        margin-bottom: 15px;
+    }
+</style>
+{{/section}} {{#section 'js'}}
+<script src="/assets/admin/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+    $('#notify').fadeIn('slow');
+    setTimeout(() => {
+        $('#notify').fadeOut(2500);
+        setTimeout(() => {
+            $('#notify').remove();
+        }, 1500);
+    }, 3000);
+
+    $('#txtDOB').datepicker({
+        format: 'd/m/yyyy',
+        autoclose: true
+    });
+</script> {{/section}}
+
+
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a>Account</a>
+            </li>
+            <li class="active">Thông Tin Tài Khoản</li>
+        </ul>
+    </div>
+</div>
+
+<div id="section" class="section">
+    <!-- container -->
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-3">
+                <!-- aside widget -->
+                <div class="aside">
+                    <h3 class="aside-title">TÀI KHOẢN</h3>
+                    <ul class="list-links">
+                        <li>
+                            <a href="/profile">Thông tin tài khoản</a>
+                        </li>
+                        <li>
+                            <a href="/cart">Quản lý giỏ hàng</a>
+                        </li>
+                        <li>
+                            <a href="/changepassword">Đổi mật khẩu</a>
+                        </li>
+                        <li>
+                            <a href="/history">Lịch sử mua hàng</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /aside widget -->
+                <!-- aside widget -->
+                <div class="aside">
+                    <img style="max-width: 100%" class="img-a" src="/assets/bookstore/img/aside/01.jpg" alt="">
+                </div>
+            </div>
+            <!-- /ASIDE -->
+
+            <!-- MAIN -->
+            <!-- MAIN -->
+            <div id="main" class="col-md-9">
+                <form id="checkout-form" class="clearfix" method="post">
+                    <div style="margin-bottom: 40px !important;" class="section-title">
+                        <h3 class="title">THÔNG TIN TÀI KHOẢN</h3>
+                    </div>
+                    {{#with user}}
+                    <div class="col-md-6">
+                        <div class="billing-details">
+                            <label class="title">Username</label>
+                            <div class="form-group">
+                                <input class="input" type="text" name="username" placeholder="username" value="{{Username}}" readonly>
+                            </div>
+                            <label class="title">Email</label>
+                            <div class="form-group">
+                                <input class="input" type="text" name="email" placeholder="email" value="{{Email}}" required>
+                            </div>
+                            <label class="title">Birthday</label>
+                            
+                            <div class="form-group">
+                                {{#if dob}}
+                                <input class="input" type="text" id="txtDOB" name="dob" placeholder="birthday" value="{{DOB}}">
+                                {{else}}
+                                <input class="input" type="text" id="txtDOB" name="dob" placeholder="{{DOB}}" value="">
+                                {{/if}}
+                            </div>
+                            <label class="title">Sex</label>
+                            <div class="form-group">
+                                <select class="input" id="select-gender" name="sex">
+                                    <option value="{{Sex}}">{{Sex}}</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Femal</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="billing-details">
+                            <label class="title">Name</label>
+                            <div class="form-group">
+                                <input class="input" type="text" name="name" placeholder="name" value="{{Fullname}}" required>
+                            </div>
+                            <label class="title">Phone</label>
+                            <div class="form-group">
+                                <input class="input" type="number" name="phone" placeholder="phone" value="{{Phone}}" required>
+                            </div>
+                            <label class="title">CMND</label>
+                            <div class="form-group">
+                                {{#if cmnd}}
+                                <input class="input" type="text" name="cmnd" placeholder="cmnd" value="{{CMND}}">
+                                {{else}}
+                                <input class="input" type="text" name="cmnd" placeholder="{{CMND}}" value="">
+                                {{/if}}
+                            </div>
+                            <label class="title">Address</label>
+                            <div class="form-group">
+                                {{#if address}}
+                                <input class="input" type="text" name="address" placeholder="cmnd" value="{{Address}}">
+                                {{else}}
+                                <input class="input" type="text" name="address" placeholder="{{Address}}" value="">
+                                {{/if}}
+                            </div>
+                            {{/with}}
+                            <div style="text-align: right">
+                                <button type="submit" class="primary-btn">update</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /MAIN -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

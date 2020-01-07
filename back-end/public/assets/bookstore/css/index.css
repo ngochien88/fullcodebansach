@@ -1,0 +1,26 @@
+
+
+  
+  .list-links li>a:before {
+    -webkit-transition: .9s ease-in-out !important;
+    transition: .9s ease-in-out !important;
+  }
+  
+ 
+    .list-links1 li figure img {
+      -webkit-transition: .9s ease-in-out !important;
+      transition: .9s ease-in-out !important;
+    }
+  .list-links3 li figure img {
+    -webkit-transition: .9s ease-in-out !important;
+    transition: .9s ease-in-out !important;
+  }
+
+  .product.product-single:hover .product-thumb:after {
+    opacity: 0.0;
+  }
+  #imgCart{
+    width: 65px !important;
+    height: 80px !important;
+  }
+  

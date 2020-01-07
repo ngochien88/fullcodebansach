@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- -------------- Meta and Title -------------- -->
+    <meta charset="utf-8">
+    <title>BOOKSTORE.COM</title>
+    <meta name="keywords" content="HTML5, Bootstrap 3, Admin Template, UI Theme" />
+    <meta name="description" content="Alliance - A Responsive HTML5 Admin UI Framework">
+    <meta name="author" content="ThemeREX">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- -------------- Fonts -------------- -->
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <!-- -------------- Icomoon -------------- -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/fonts/icomoon/icomoon.css">
+
+    <!-- -------------- FullCalendar -------------- -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/js/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/admin/js/plugins/magnific/magnific-popup.css">
+
+    <!-- -------------- Plugins -------------- -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/js/plugins/c3charts/c3.min.css">
+
+    <!-- -------------- CSS - theme -------------- -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/skin/default_skin/css/theme.css">
+
+    <!-- -------------- CSS - allcp forms -------------- -->
+    <link rel="stylesheet" type="text/css" href="/assets/admin/allcp/forms/css/forms.css">
+    <link rel="stylesheet" href="/assets/admin/css/style.css">
+     {{{_sections.css}}}
+    <!-- -------------- Favicon -------------- -->
+
+    <link rel="icon" type="image/x-icon" href="/assets/bookstore/img/B.png">
+
+
+</head>
+
+<body class="dashboard-page">
+
+
+    <!-- -------------- Body Wrap  -------------- -->
+    <div id="main">
+
+        <!-- -------------- Header  -------------- -->
+        <header class="navbar navbar-fixed-top bg-dark">
+            <div class="navbar-logo-wrapper">
+                <a class="navbar-logo-text" href="/admin/dashboard">
+                    <b>BOOKSTORE.COM</b>
+                </a>
+                <span id="sidebar_left_toggle" class="ad ad-lines"></span>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown dropdown-fuse">
+                    <a href="#" class="dropdown-toggle fw600" data-toggle="dropdown">
+                        <span class="hidden-xs text-right">
+                            <name>{{layoutVM.curUser.Username}}</name>
+                        </span>
+                        {{!-- <span class="fa fa-caret-down hidden-xs mr15"></span> --}}
+                    </a>
+                    <ul class="dropdown-menu list-group keep-dropdown w250" role="menu">
+                        <li class="list-group-item">
+                            <a href="/admin/users/info" class="animated animated-short fadeInUp">
+                                <span class="fa fa-user"></span> View Info </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/admin/users/changepassword" class="animated animated-short fadeInUp">
+                                <span class="fa fa-cogs"></span> Change Password </a>
+                        </li>
+                        <li class="dropdown-footer text-center">
+                            <a id="btnLogout" class="btn btn-primary btn-sm btn-bordered">
+                                <span class="fa fa-power-off pr5"></span> Logout
+                            </a>
+                        </li>
+                        <form id="frmLogout" action="/admin/users/logout" method="post"></form>
+                    </ul>
+                </li>
+            </ul>
+        </header>
+        <!-- -------------- /Header  -------------- -->
+
+        <!-- -------------- Sidebar  -------------- -->
+        <aside id="sidebar_left" class="nano nano-light affix">
+            <!-- -------------- Sidebar Left Wrapper  -------------- -->
+            <div class="sidebar-left-content nano-content">
+                <!-- -------------- Sidebar Menu  -------------- -->
+                <ul style="padding-top: 15px;" class="nav sidebar-menu">
+                    <li>
+                        <a class="active" href="/admin/dashboard">
+                            <span class="fa fa-dashboard"></span>
+                            <span class="sidebar-title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li id="nv">
+                        <a class="accordion-toggle" href="javascript:;">
+                            <span class="fa fa-user"></span>
+                            <span class="sidebar-title">users management</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="nav sub-nav">
+                            <li>
+                                <a href="/admin/users">
+                                    <span class="glyphicon glyphicon-tags"></span> Admin </a>
+                            </li>
+                            <li>
+                                <a href="/admin/customers">
+                                    <span class="glyphicon glyphicon-tags"></span> Customer</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="accordion-toggle" href="javascript:;">
+                            <span class="fa fa-book"></span>
+                            <span class="sidebar-title">products management</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="nav sub-nav">
+                            <li>
+                                <a href="/admin/brands">
+                                    <span class="fa fa-money"></span> Brands</a>
+                            </li>
+                            <li>
+                                <a href="/admin/products">
+                                    <span class="glyphicon glyphicon-tags"></span> Products </a>
+                            </li>
+                            <li>
+                                <a href="/admin/category">
+                                    <span class="glyphicon glyphicon-tags"></span> Categories</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="active" href="/admin/orders">
+                            <span class="fa fa-shopping-cart"></span>
+                            <span class="sidebar-title">orders management</span>
+                        </a>
+                    </li>
+
+                </ul>
+                <!-- -------------- Sidebar Hide Button -------------- -->
+            </div>
+            <!-- -------------- /Sidebar Left Wrapper  -------------- -->
+
+        </aside>
+        <!-- -------------- /Sidebar -------------- -->
+        <!-- -------------- Main Wrapper -------------- -->
+        <section id="content_wrapper">
+            <!-- -------------- Content -------------- -->
+            <section id="content" class="table-layout animated fadeIn">
+
+                <div class="chute chute-center">
+                    {{{body}}}
+                </div>
+
+
+            </section>
+            <!-- -------------- /Content -------------- -->
+
+
+
+        </section>
+        <!-- -------------- /Main Wrapper -------------- -->
+
+    </div>
+    <!-- -------------- /Body Wrap  -------------- -->
+
+    <!-- -------------- Scripts -------------- -->
+
+    <!-- -------------- jQuery -------------- -->
+
+
+    <script src="/assets/admin/js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="/assets/admin/js/jquery/jquery_ui/jquery-ui.min.js"></script>
+
+    <!-- -------------- HighCharts Plugin -------------- -->
+    <script src="/assets/admin/js/plugins/highcharts/highcharts.js"></script>
+    <script src="/assets/admin/js/plugins/c3charts/d3.min.js"></script>
+    <script src="/assets/admin/js/plugins/c3charts/c3.min.js"></script>
+
+    <!-- -------------- Simple Circles Plugin -------------- -->
+    <script src="/assets/admin/js/plugins/circles/circles.js"></script>
+
+    <!-- -------------- Maps JSs -------------- -->
+    <script src="/assets/admin/js/plugins/jvectormap/jquery.jvectormap.min.js"></script>
+    <script src="/assets/admin/js/plugins/jvectormap/assets/jquery-jvectormap-us-lcc-en.js"></script>
+
+    <!-- -------------- FullCalendar Plugin -------------- -->
+    <script src="/assets/admin/js/plugins/fullcalendar/lib/moment.min.js"></script>
+    <script src="/assets/admin/js/plugins/fullcalendar/fullcalendar.min.js"></script>
+
+    <!-- -------------- Date/Month - Pickers -------------- -->
+    <script src="/assets/admin/allcp/forms/js/jquery-ui-monthpicker.min.js"></script>
+    <script src="/assets/admin/allcp/forms/js/jquery-ui-datepicker.min.js"></script>
+
+    <!-- -------------- Magnific Popup Plugin -------------- -->
+    <script src="/assets/admin/js/plugins/magnific/jquery.magnific-popup.js"></script>
+
+    <!-- -------------- Theme Scripts -------------- -->
+    <script src="/assets/admin/js/utility/utility.js"></script>
+    <script src="/assets/admin/js/demo/demo.js"></script>
+    <script src="/assets/admin/js/main.js"></script>
+
+    <!-- -------------- Widget JS -------------- -->
+    <script src="/assets/admin/js/demo/widgets.js"></script>
+    <script src="/assets/admin/js/demo/widgets_sidebar.js"></script>
+    <script src="/assets/admin/js/pages/dashboard1.js"></script> {{{_sections.js}}}
+    <script>
+        $('#btnLogout').on('click', function () {
+            $('#frmLogout').submit();
+        });
+    </script>
+    <!-- -------------- /Scripts -------------- -->
+
+</body>
+
+</html>

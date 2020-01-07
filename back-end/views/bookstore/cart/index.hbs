@@ -1,0 +1,148 @@
+{{#section 'js'}}
+<script src="/assets/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+<script type="text/javascript">
+    $('.removeItem').on('click', function () {
+        var id = $(this).data('proid');
+        $('#txtProId_R').val(id);
+        $('#frmRemoveItem').submit();
+    });
+    
+    $('.touchspin').TouchSpin({
+        min: 0,
+        max: 100,
+        boostat: 5,
+        maxboostedstep: 10,
+    });
+    $('.btn btn-primary bootstrap-touchspin-down').hide();
+
+</script> {{/section}} {{#section 'css'}} {{/section}}
+<form id="frmRemoveItem" method="post" action="/cart/remove">
+    <input id="txtProId_R" type="hidden" name="id">
+</form>
+{{!-- <form id="frmCheckout" method="post" action="/cart/checkout">
+</form> --}}
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li class="active">Checkout</li>
+        </ul>
+    </div>
+</div>
+
+{{#if isEmpty}}
+<div id="section" class="section">
+    <!-- container -->
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <form id="checkout-form" class="clearfix">
+                <div class="col-md-12">
+                    <div class="order-summary clearfix">
+                        <div class="section-title">
+                            <h3 class="title">hiện tại bạn chưa mua hàng</h3>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+{{else}}
+<div id="section" class="section">
+    <!-- container -->
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <form id="checkout-form" class="clearfix" method="POST">
+                <div class="col-md-12">
+                    <div class="order-summary clearfix">
+                        <div class="section-title">
+                            <h3 class="title">KIỂM TRA LẠI GIỎ HÀNG</h3>
+                        </div>
+                        <table class="shopping-cart-table table">
+                            <thead>
+                                <colgroup>
+                                    <col />
+                                    <col />
+                                    <col />
+                                    <col width="110px" />
+                                    <col />
+                                </colgroup>
+                                <tr>
+                                    <th>Hình ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th class="text-center">Giá</th>
+                                    <th class="text-center">Số Lượng</th>
+                                    <th class="text-center">Thành Tiền</th>
+                                    <th class="text-right"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each cart}}
+                                <tr>
+                                    <td style="width: 10%" class="thumb">
+                                        <img src="/assets/img/1/{{Picture}}" alt="">
+                                    </td>
+                                    <td style="width: 50%" class="details">
+                                        <a href="/products?id={{id}}">{{Name}}</a>
+                                    </td>
+                                    {{#if Saling}}
+                                    <td class="price text-center">
+                                        <strong>{{number_format salePrice}}</strong>
+                                        <b>đ</b>
+                                        <br>
+                                        <del class="font-weak">
+                                            <small>{{number_format Price}}đ</small>
+                                        </del>
+                                    </td>
+                                    {{else}}
+                                    <td class="price text-center">
+                                        <strong>{{number_format Price}}</strong>
+                                        <b>đ</b>
+                                    </td>
+                                    {{/if}}
+                                    <td id="nhanam-09" class="qty text-center">
+                                        <input id="nhanam-09" name="count" class="touchspin" type="text" value="{{Count}}" required>
+                                        <input type="hidden" name="id" value="{{id}}">
+                                    </td>
+                                    <td id="nhanam-09" class="total text-center">
+                                        <strong id="total-price" class="primary-color">{{number_format Total}}</strong>
+                                        <b class="primary-color">đ</b>
+                                    </td>
+                                    <td id="nhanam-09" class="text-right">
+                                        <a data-proid="{{id}}" class="main-btn icon-btn delete-item removeItem" href="javascript:;" role="button">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="empty" colspan="3"></th>
+                                    <th>THÀNH TIỀN</th>
+                                    <th id="final-total" colspan="2" class="total">{{number_format total}} đ</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="pull-right">
+                            <button class="primary-btn" type="submit">update cart</button>
+                            <a class="primary-btn" href="/cart/checkout">check out</a>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+{{/if}}

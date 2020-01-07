@@ -1,0 +1,106 @@
+
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a>Account</a>
+            </li>
+            <li class="active">Lịch Sử Mua Hàng</li>
+        </ul>
+    </div>
+</div>
+
+<div id="section" class="section">
+    <!-- container -->
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-3">
+                <!-- aside widget -->
+                <div class="aside">
+                    <h3 class="aside-title">TÀI KHOẢN</h3>
+                    <ul class="list-links">
+                        <li>
+                            <a href="/profile">Thông tin tài khoản</a>
+                        </li>
+                        <li>
+                            <a href="/cart">Quản lý giỏ hàng</a>
+                        </li>
+                        <li>
+                            <a href="/changepassword">Đổi mật khẩu</a>
+                        </li>
+                        <li>
+                            <a href="/history">Lịch sử mua hàng</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /aside widget -->
+                <!-- aside widget -->
+                <div class="aside">
+                    <img style="max-width: 100%" class="img-a" src="/assets/bookstore/img/aside/01.jpg" alt="">
+                </div>
+                <div class="aside">
+                    <img style="max-width: 100%" class="img-a" src="/assets/bookstore/img/aside/02.jpg" alt="">
+                </div>
+            </div>
+            <!-- /ASIDE -->
+
+            <!-- MAIN -->
+            <div id="main" class="col-md-9">
+                <form id="checkout-form" class="clearfix">
+                    <div class="col-md-12">
+                        <div class="order-summary clearfix">
+                            <div class="section-title">
+                                <h3 class="title">ĐƠN HÀNG CỦA TÔI</h3>
+                            </div>
+                            {{#if len}}
+                                Bạn chưa có đơn hàng nào.
+                            {{else}}
+                            <table class="shopping-cart-table table"  style="font-size: 85%">
+                                <thead>
+                                    <tr>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Ngày mua</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Tổng tiền</th>
+                                        <th class="text-center">Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                {{#each order}}
+                                    <tbody>
+                                    <tr>
+                                        <td><a class="text-center" href="/order?id={{id}}" style="color: #F8694A">{{id}}</td>
+                                        <td>{{moment Date format="DD/MM/YYYY"}}</td>
+                                        <td>
+                                            {{#each ../order_detail}}
+                                                {{#is OrderID ../id}}
+                                                    {{Name}} (x{{Count}})
+                                                    <br>
+                                                {{/is}}
+                                            {{/each}}
+                                        </td>
+                                        <td>{{number_format Total}} đ</td>
+                                        {{#is Status 0}}<td class="text-center">Chưa giao</td>{{/is}}
+                                        {{#is Status 1}}<td class="text-center">Đang giao</td>{{/is}}
+                                        {{#is Status 2}}<td class="text-center">Đã giao</td>{{/is}}
+                                    </tr>
+                                </tbody>
+                                {{/each}}
+                            </table>
+                            {{/if}}
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

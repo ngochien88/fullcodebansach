@@ -1,0 +1,51 @@
+<div id="breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li class="active">Checkout</li>
+        </ul>
+    </div>
+</div>
+
+<div id="section" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <form id="checkout-form" class="clearfix" method="POST">
+                <div class="col-md-12">
+                    <div class="order-summary clearfix">
+                        <div class="section-title">
+                            <h3 class="title">
+                                {{#if isSuccess}}
+                                    ĐẶT HÀNG THÀNH CÔNG
+                                {{else}}
+                                    ĐẶT HÀNG THẤT BẠI
+                                {{/if}}
+                            </h3>
+                        </div>
+                            {{#if isSuccess}}
+                                Đơn hàng của bạn đã được đặt thành công.
+                            {{else}}
+                                Không thể thực hiện đặt hàng với đơn hàng của bạn. <br/>
+                                {{#each proList}}
+                                    - <a href="/products?id={{id}}">{{Name}}</a> - Số lượng tồn: {{Amount}} <br/>
+                                {{/each}}
+                             {{/if}}
+                        <div class="pull-right">
+                            {{#if isSuccess}}
+                                <a class="primary-btn" href="/history">Go To History</a>
+                            {{else}}
+                                <a class="primary-btn" href="/cart">Back To Cart</a>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
