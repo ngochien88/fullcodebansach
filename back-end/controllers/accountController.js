@@ -25,7 +25,7 @@ router.get('/admin', (req, res) => {
 
 router.post('/admin', (req, res) => {
     return passport.authenticate('user', (err, user, info) => {
-        if (err) {
+        if (err || !user) {
             let vm = {
                 layout: false,
                 error: true
@@ -443,7 +443,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', (req, res) => {
     return passport.authenticate('user', (err, user, info) => {
-        if (err) {
+        if (err || !user) {
             vm = {
                 layout: 'index.handlebars',
                 error: true
