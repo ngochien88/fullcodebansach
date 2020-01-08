@@ -1,0 +1,20 @@
+{
+  "name": "bookstore-tgt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd back-end && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngochien88/fullcodebansach.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ngochien88/fullcodebansach/issues"
+  },
+  "homepage": "https://github.com/ngochien88/fullcodebansach#readme"
+}
