@@ -86,8 +86,11 @@ app.use('/admin/orders', orderController);
 app.use('/cart', cartController);
 
 app.use(handle404);
-app.listen(3000, () => {
-    console.log('Site  running on port 3000');
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+    console.log('Site  running on port:', port);
 });
 
 
