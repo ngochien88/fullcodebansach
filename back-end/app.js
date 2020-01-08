@@ -23,7 +23,7 @@ var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 var handle404 = require('./middle-wares/handle404'),
     handleLayout = require('./middle-wares/handleLayout');
-
+var config = require('./config/config');
 var app = express();
 
 
@@ -52,12 +52,8 @@ app.use(bodyParser.urlencoded({
 app.use(passport.initialize());
 
 // session
-
-var sessionStore = new MySQLStore({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    database: 'bookstore',
+var sessionStoreConfig = {
+    ...config.DB,
     createDatabaseTable: true,
     schema: {
         tableName: 'sessions',
@@ -67,7 +63,8 @@ var sessionStore = new MySQLStore({
             data: 'data'
         }
     }
-});
+}
+var sessionStore = new MySQLStore(sessionStoreConfig);
 
 app.use(session({
     key: 'session_cookie_name',
